@@ -77,7 +77,8 @@ hide: true
         "36": "red"
     };
 
-    function updateHistoryTable () {
+    function updateHistoryTable (output) {
+        spinHistory.push(output)
         historyTable.innerHTML = ""
 
         const labelRow = document.createElement("tr")
@@ -93,7 +94,10 @@ hide: true
 
         historyTable.appendChild(labelRow)
 
-        spinHistory.map((number) => {
+        orderedHistory = spinHistory
+        orderedHistory.reverse()
+
+        orderedHistory.map((number) => {
             const row = document.createElement("tr")
             const num = document.createElement("th")
             num.innerHTML = number
@@ -114,8 +118,7 @@ hide: true
 
         const output = randNum == 37 ? "00":randNum.toString();
 
-        spinHistory.push(output)
-        updateHistoryTable()
+        updateHistoryTable(output)
         outputContent.innerHTML = output
     }
 </script>
