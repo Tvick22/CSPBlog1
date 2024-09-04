@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Sprint 1 - Roulette Table!
-description: Tools and Software Development for Sprint 1
+title: Roulette Table
+description: Simple Roulette Table
 type: issues
 comments: False
 ---
@@ -33,7 +33,7 @@ comments: False
     <tr>
         <th>Number</th>
         <th>Color</th>
-        <th>Bet</th>
+        <th>Total Bet</th>
         <th>Winnings</th>
     </tr>
 </table>
