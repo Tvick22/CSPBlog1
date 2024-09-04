@@ -7,33 +7,45 @@ const redBet = document.getElementById("bet-red-btn");
 const blackBet = document.getElementById("bet-black-btn");
 const greenBet = document.getElementById("bet-green-btn");
 
-const betColors = { red: 0, black: 0, green: 0 };
+const betColors = { Red: 0, Black: 0, Green: 0 };
+
 let totalBet = 0;
 let money = 100;
+
+const spinHistory = {
+  history: [],
+  add: (entry) => {
+    spinHistory.history.push(entry);
+    console.log(spinHistory.history);
+  },
+  remove: (entry) => {
+    spinHistory.history.splice(this.history.indexOf(entry), 1);
+  },
+};
 
 function betColor() {
   const red = redBet.value ? Number(redBet.value) : 0;
   const black = blackBet.value ? Number(blackBet.value) : 0;
   const green = greenBet.value ? Number(greenBet.value) : 0;
   if (red < 0 || black < 0 || green < 0) {
-    redBet.value = betColors.red !== 0 ? betColors.red : "";
-    greenBet.value = betColors.green !== 0 ? betColors.green : "";
-    blackBet.value = betColors.black !== 0 ? betColors.black : "";
+    redBet.value = betColors.Red !== 0 ? betColors.Red : "";
+    greenBet.value = betColors.Green !== 0 ? betColors.Green : "";
+    blackBet.value = betColors.Black !== 0 ? betColors.Black : "";
     return;
   }
   totalBet = red + black + green;
 
   if (totalBet > money) {
-    redBet.value = betColors.red !== 0 ? betColors.red : "";
-    greenBet.value = betColors.green !== 0 ? betColors.green : "";
-    blackBet.value = betColors.black !== 0 ? betColors.black : "";
-
+    redBet.value = betColors.Red !== 0 ? betColors.Red : "";
+    greenBet.value = betColors.Green !== 0 ? betColors.Green : "";
+    blackBet.value = betColors.Black !== 0 ? betColors.Black : "";
+    totalBet = betColors.Red + betColors.Black + betColors.Green;
     return;
   }
 
-  betColors.red = red;
-  betColors.black = black;
-  betColors.green = green;
+  betColors.Red = red;
+  betColors.Black = black;
+  betColors.Green = green;
 
   totalBetContent.innerHTML = totalBet;
 }
@@ -44,10 +56,21 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-const spinHistory = [];
+function getWinnings(pocket, winMultiplier) {
+  const winningBet = betColors[pocket.color];
+  return winningBet * winMultiplier;
+}
 
-function updateHistoryTable(output) {
-  spinHistory.push(output);
+function updateDisplays() {
+  moneyContent.innerHTML = money;
+  redBet.value = "";
+  blackBet.value = "";
+  greenBet.value = "";
+  totalBetContent.innerHTML = 0;
+}
+
+function updateHistoryTable(tableEntry) {
+  spinHistory.add(tableEntry);
   historyTable.innerHTML = "";
 
   const labelRow = document.createElement("tr");
@@ -56,7 +79,7 @@ function updateHistoryTable(output) {
   const colorLabel = document.createElement("th");
   colorLabel.innerHTML = "Color";
   const betLabel = document.createElement("th");
-  betLabel.innerHTML = "Bet";
+  betLabel.innerHTML = "Total Bet";
   const winLabel = document.createElement("th");
   winLabel.innerHTML = "Winnings";
   labelRow.appendChild(numberLabel);
@@ -66,19 +89,19 @@ function updateHistoryTable(output) {
 
   historyTable.appendChild(labelRow);
 
-  orderedHistory = spinHistory;
+  orderedHistory = spinHistory.history;
   orderedHistory.reverse();
 
   orderedHistory.forEach((pocket) => {
     const row = document.createElement("tr");
     const num = document.createElement("th");
-    num.innerHTML = pocket;
+    num.innerHTML = pocket.numberString;
     const color = document.createElement("th");
-    color.innerHTML = determineColor(pocket);
+    color.innerHTML = pocket.color;
     const bet = document.createElement("th");
-    bet.innerHTML = "-";
+    bet.innerHTML = "" + pocket.totalBet;
     const win = document.createElement("th");
-    win.innerHTML = "-";
+    win.innerHTML = pocket.gains >= 0 ? "+" + pocket.gains : pocket.gains;
     row.appendChild(num);
     row.appendChild(color);
     row.appendChild(bet);
@@ -88,12 +111,12 @@ function updateHistoryTable(output) {
 }
 
 /**
- * Determines the color of the number
- * @param {string} pocket
+ * Determines the color of the pocket based on the number
+ * @param {string} pocketString
  * @returns {"Green" | "Red" | "Black"}
  */
-function determineColor(pocket) {
-  pocketNumber = Number(pocket);
+function determineColor(pocketString) {
+  pocketNumber = Number(pocketString);
 
   if (pocketNumber == 0) {
     return "Green";
@@ -106,11 +129,46 @@ function determineColor(pocket) {
   }
 }
 
+/**
+ * Creates a pocket object with number and color
+ * @param {number} randomNumber
+ * @typedef {Object} pocket
+ * @property {string} numberString
+ * @property {"Green" | "Red" | "Black"} color
+ * @returns {pocket}
+ */
+function createPocket(randomNumber) {
+  const stringPocketNumber =
+    randomNumber == 37 ? "00" : randomNumber.toString();
+  return {
+    numberString: stringPocketNumber,
+    color: determineColor(stringPocketNumber),
+  };
+}
+
+function createHistoryTableEntry(pocket, gains, totalBet) {
+  return {
+    numberString: pocket.numberString,
+    color: pocket.color,
+    totalBet: totalBet,
+    gains: gains,
+  };
+}
+
 function spinRouletteTable() {
-  const randNum = getRandomInt(0, 37);
-
-  const output = randNum == 37 ? "00" : randNum.toString();
-
-  updateHistoryTable(output);
-  outputContent.innerHTML = output;
+  const randomNumber = getRandomInt(0, 37);
+  console.log(betColors);
+  const pocket = createPocket(randomNumber);
+  const startingMoney = money;
+  const winnings = getWinnings(pocket, 2);
+  money -= totalBet;
+  money += winnings;
+  const gains = money - startingMoney;
+  const tableEntry = createHistoryTableEntry(pocket, gains, totalBet);
+  updateHistoryTable(tableEntry);
+  updateDisplays();
+  outputContent.innerHTML = pocket.numberString;
+  betColors.Red = 0;
+  betColors.Black = 0;
+  betColors.Green = 0;
 }
