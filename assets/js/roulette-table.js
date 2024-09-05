@@ -7,7 +7,14 @@ const redBet = document.getElementById("bet-red-btn");
 const blackBet = document.getElementById("bet-black-btn");
 const greenBet = document.getElementById("bet-green-btn");
 
-const betColors = { Red: 0, Black: 0, Green: 0 };
+const betColors = {
+  Red: 0,
+  Black: 0,
+  Green: 0,
+  total: () => {
+    return betColors.Red + betColors.Black + betColors.Green;
+  },
+};
 
 let totalBet = 0;
 let money = 100;
@@ -27,27 +34,12 @@ function betColor() {
   const red = redBet.value ? Number(redBet.value) : 0;
   const black = blackBet.value ? Number(blackBet.value) : 0;
   const green = greenBet.value ? Number(greenBet.value) : 0;
-  if (red < 0 || black < 0 || green < 0) {
-    redBet.value = betColors.Red !== 0 ? betColors.Red : "";
-    greenBet.value = betColors.Green !== 0 ? betColors.Green : "";
-    blackBet.value = betColors.Black !== 0 ? betColors.Black : "";
-    return;
-  }
-  totalBet = red + black + green;
-
-  if (totalBet > money) {
-    redBet.value = betColors.Red !== 0 ? betColors.Red : "";
-    greenBet.value = betColors.Green !== 0 ? betColors.Green : "";
-    blackBet.value = betColors.Black !== 0 ? betColors.Black : "";
-    totalBet = betColors.Red + betColors.Black + betColors.Green;
-    return;
-  }
 
   betColors.Red = red;
   betColors.Black = black;
   betColors.Green = green;
 
-  totalBetContent.innerHTML = totalBet;
+  totalBetContent.innerHTML = betColors.total();
 }
 
 function getRandomInt(min, max) {
@@ -63,10 +55,10 @@ function getWinnings(pocket, winMultiplier) {
 
 function updateDisplays() {
   moneyContent.innerHTML = money;
-  redBet.value = "";
-  blackBet.value = "";
-  greenBet.value = "";
-  totalBetContent.innerHTML = 0;
+  redBet.value = betColors.Red;
+  blackBet.value = betColors.Black;
+  greenBet.value = betColors.Green;
+  totalBetContent.innerHTML = betColors.total();
 }
 
 function updateHistoryTable(tableEntry) {
@@ -156,19 +148,24 @@ function createHistoryTableEntry(pocket, gains, totalBet) {
 }
 
 function spinRouletteTable() {
+  if (betColors.total() == 0) {
+    alert("Please place a valid bet");
+    return;
+  }
+  if (betColors.total() > money) {
+    alert("You do not have the funds to make this bet");
+    return;
+  }
   const randomNumber = getRandomInt(0, 37);
   console.log(betColors);
   const pocket = createPocket(randomNumber);
   const startingMoney = money;
   const winnings = getWinnings(pocket, 2);
-  money -= totalBet;
+  money -= betColors.total();
   money += winnings;
   const gains = money - startingMoney;
-  const tableEntry = createHistoryTableEntry(pocket, gains, totalBet);
+  const tableEntry = createHistoryTableEntry(pocket, gains, betColors.total());
   updateHistoryTable(tableEntry);
   updateDisplays();
   outputContent.innerHTML = pocket.numberString;
-  betColors.Red = 0;
-  betColors.Black = 0;
-  betColors.Green = 0;
 }
