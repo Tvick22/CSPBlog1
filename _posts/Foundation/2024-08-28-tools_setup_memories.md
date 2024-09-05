@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Sprint 1 - Tools Setup Memories
+title: Sprint 1 - Tools Setup Memories (Linux Commands)
 description: Tools and Software Development for Sprint 1
 type: issues
 comments: True
@@ -39,3 +39,15 @@ cd "directory-name"
 ```
 
 - This will change your current directory
+
+```shell
+brew install "package"
+```
+
+- This will use the package manager (brew) to install different packages including ruby, python, etc.
+
+```shell
+make
+```
+
+- This command is ran in the project directory and will use the Makefile to run our site locally.
