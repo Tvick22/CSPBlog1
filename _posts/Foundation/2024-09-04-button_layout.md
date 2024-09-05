@@ -60,6 +60,7 @@ comments: True
     .container {
         padding: 10px 10px 10px 10px;
         width: 640px;
+        background-color: #ffff !important;
     }
     .wrappertop {
         background-color: #ffff;
