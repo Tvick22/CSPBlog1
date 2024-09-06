@@ -47,12 +47,15 @@ comments: False
         z-index: 10000;
     }
     .bet-red-btn {
-        background-color: red !important
+        background-color: red !important;
+        color: white !important;
     }
     .bet-black-btn {
-        background-color: black !important
+        background-color: black !important;
+        color: white !important;
     }
     .bet-green-btn {
-        background-color: green !important
+        background-color: green !important;
+        color: white !important;
     }
 </style>
