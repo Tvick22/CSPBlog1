@@ -50,7 +50,7 @@ function getRandomInt(min, max) {
 
 function getWinnings(pocket, winMultiplier) {
   const winningBet = betColors[pocket.color];
-  return winningBet * winMultiplier;
+  return winningBet * winMultiplier + winningBet;
 }
 
 function updateDisplays() {
@@ -81,7 +81,7 @@ function updateHistoryTable(tableEntry) {
 
   historyTable.appendChild(labelRow);
 
-  orderedHistory = spinHistory.history;
+  orderedHistory = [...spinHistory.history];
   orderedHistory.reverse();
 
   orderedHistory.forEach((pocket) => {
@@ -152,6 +152,12 @@ function spinRouletteTable() {
     alert("Please place a valid bet");
     return;
   }
+  if (betColors.Black < 0 || betColors.Red < 0 || betColors.Green < 0) {
+    alert(
+      `All bets must be GREATER than or EQUAL to 0 (Red: ${betColors.Red}, Black: ${betColors.Black}, Green: ${betColors.Green}, `,
+    );
+    return;
+  }
   if (betColors.total() > money) {
     alert("You do not have the funds to make this bet");
     return;
@@ -160,7 +166,11 @@ function spinRouletteTable() {
   console.log(betColors);
   const pocket = createPocket(randomNumber);
   const startingMoney = money;
-  const winnings = getWinnings(pocket, 2);
+  let winMultiplier = 2;
+  if (pocket.color == "Green") {
+    winMultiplier = 10;
+  }
+  const winnings = getWinnings(pocket, winMultiplier);
   money -= betColors.total();
   money += winnings;
   const gains = money - startingMoney;
