@@ -166,7 +166,7 @@ function spinRouletteTable() {
   console.log(betColors);
   const pocket = createPocket(randomNumber);
   const startingMoney = money;
-  let winMultiplier = 2;
+  let winMultiplier = 1;
   if (pocket.color == "Green") {
     winMultiplier = 10;
   }
