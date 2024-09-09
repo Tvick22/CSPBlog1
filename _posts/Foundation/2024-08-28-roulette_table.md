@@ -8,6 +8,8 @@ comments: False
 
 # Roulette Table
 
+<button class="reset-btn" onClick="location.reload()">RESET</button>
+
 ---
 
 <button class="roulette-btn" onClick="spinRouletteTable()">Spin</button>
@@ -19,10 +21,11 @@ comments: False
 
 <h2>Total Bet: <span id="total-bet">0</span></h2>
 
-<input id="bet-red-btn" class="bet-red-btn" oninput="betColor()" color="red" type="number"/>
-<input id="bet-black-btn" class="bet-black-btn" oninput="betColor()" color="black" type="number"/>
-<input id="bet-green-btn" class="bet-green-btn" oninput="betColor()" color="green" type="number"/>
-
+<div class="bet-colors-container">
+    <input placeholder="Bet on Red" id="bet-red-btn" class="bet-red-btn" oninput="betColor()" color="red" type="number"/>
+    <input placeholder="Bet on Black" id="bet-black-btn" class="bet-black-btn" oninput="betColor()" color="black" type="number"/>
+    <input placeholder="Bet on Green" id="bet-green-btn" class="bet-green-btn" oninput="betColor()" color="green" type="number"/>
+</div>
 ---
 
 ## History
@@ -41,21 +44,39 @@ comments: False
 <script src="../../../assets/js/roulette-table.js"></script>
 
 <style>
+    .reset-btn {
+      background-color:  #24a0ed;
+      border-radius: 5px;
+    }
     .roulette-btn {
         width: 100%;
         height: 100%;
         z-index: 10000;
+        border-radius: 5px;
+    }
+    .bet-colors-container {
+        display: flex;
     }
     .bet-red-btn {
         background-color: red !important;
         color: white !important;
+        padding: 10px;
+        margin: 3px;
     }
     .bet-black-btn {
         background-color: black !important;
         color: white !important;
+        padding: 10px;
+        margin: 3px;
     }
     .bet-green-btn {
         background-color: green !important;
+        color: white !important;
+        padding: 10px;
+        margin: 3px;
+    }
+
+    ::placeholder {
         color: white !important;
     }
 </style>
