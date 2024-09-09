@@ -7,6 +7,6 @@ hide: true
 
 # Welcome to my Blog!
 
-> Check out the *Blogs* tab in the header!
+> Check out the <a href="./blogs">Blogs</a> tab in the header!
 
-> Also check out the *Roulette Game* under *Blogs*!
+> Also check out the <a href="./2024/08/28/roulette_table.html">Roulette Game</a> under <a href="./blogs">Blogs</a>!
