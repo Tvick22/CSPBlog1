@@ -27,13 +27,13 @@ Rank to Ratio, rank is an integer
 | Show VSCode GitLens                    | [N]            | 4          | 0.9   | verify commits, show change, comments, reset to commit, run on old commit |
 | GitHub student_2025 repo               | [Y]            | 4          | 0.95  | template create, push changes, verify id, review analytics             |
 | GitHub Pages Actions                   | [N]            | 4          | 0.9   | review runs and verify runtime, receive demo            |
-| Hacks Tools & Equipment Play           | [ ]            | 0          | 0.0   | [Hacks](https://nighthawkcoders.github.io/portfolio_2025/jupyter/notebook/python#hacks) |
-| Hacks GitHub Pages Playground          | [ ]            | 0          | 0.0   | [Hacks](https://nighthawkcoders.github.io/portfolio_2025/github/pages/hacks) |
-| Hacks SASS Basics                      | [ ]            | 0          | 0.0   | [Hacks](https://nighthawkcoders.github.io/portfolio_2025/sass_basics/play) |
-| Hacks Frontend                         | [ ]            | 0          | 0.0   | [Hacks](https://nighthawkcoders.github.io/portfolio_2025/frontend/basics/playground) |
+| Hacks Tools & Equipment Play           | [N]            | 4          | 0.9   | [Hacks](https://nighthawkcoders.github.io/portfolio_2025/jupyter/notebook/python#hacks) |
+| Hacks GitHub Pages Playground          | [N]            | 4          | 0.9   | [Hacks](https://nighthawkcoders.github.io/portfolio_2025/github/pages/hacks) |
+| Hacks SASS Basics                      | [N]            | 4          | 0.9   | [Hacks](https://nighthawkcoders.github.io/portfolio_2025/sass_basics/play) |
+| Hacks Frontend                         | [Y]            | 4          | 0.95  | [Hacks](https://nighthawkcoders.github.io/portfolio_2025/frontend/basics/playground) |
 | Pair Programming                       | [Y]            | 4          | 0.95  | tangibles that show coop work                           |
-| **Total**                              |                |            | 0.0   |                                                         |
-| **Average**                            |                |            | 0.0   |                                                         |
+| **Total**                              |                |            | 9.25   |                                                         |
+| **Average**                            |                |            | 0.925   |                                                         |
 
 ## Learning Habits Table
 Review criteria in habits.  In this review, pairs should rate each other base on their experience with the person on the line item.
