@@ -20,6 +20,8 @@ permalink: /about/
 
 #### Lifting PRs 💪💪
 
+<img class="center shadow" src="../images/barbell-image-aboutme.jpeg" />
+
 | Lift | Weight (lbs) |
 | ---- | ----------- |
 | Bench Press | 205 |
@@ -28,3 +30,16 @@ permalink: /about/
 | Deadlift | 345 |
 | Front Squat | 255 |
 | Snatch | 155 |
+
+
+<style>
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+.shadow {
+  box-shadow: 5px 5px 5px grey;
+}
+</style>
