@@ -6,6 +6,8 @@ type: issues
 comments: True
 ---
 
+## Finding the mean in Python!
+
 ```python
 import sys
 import statistics
@@ -35,5 +37,12 @@ badData = [100, "NaN", 90]
 print("The mean of the bad data is: " + str(mean(badData)))
 ```
 
-> The mean of the test scores is: 90.975
-> The meann of the bad data is: Bad Data
+Output:
+
+The mean of the test scores is: 90.975
+
+The mean of the bad data is: Bad Data
+
+> This function finds the mean by importing statistics and using the statistics.mean() method.
+
+> Before doing this though, I will iterate through the table and make sure all values are either integers or floating point numbers.
