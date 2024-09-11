@@ -105,6 +105,10 @@ function winBtnClick(name) {
 function betBtnClick(name) {
   const cardTotal = document.getElementById(`${name}-total`);
   const total = users[name].money;
+  if (total < removeAmount) {
+    alert("Insuficient Funds");
+    return;
+  }
   const newTotal = total - removeAmount;
   potTotal += removeAmount;
   potTotalDisplay.innerHTML = potTotal;
