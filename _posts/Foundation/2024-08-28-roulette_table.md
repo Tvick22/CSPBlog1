@@ -41,7 +41,7 @@ comments: False
     </tr>
 </table>
 
-<script src="../../../assets/js/roulette-table.js"></script>
+<script src="{{site.baseurl}}/assets/js/roulette-table.js"></script>
 
 <style>
     .reset-btn {
