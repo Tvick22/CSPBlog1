@@ -1,0 +1,135 @@
+.cookie-clicker-container {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    height: 120vh;
+    width: 70vw;
+    background: url("/CSPBlog1/images/cookie-wallpaper.jpg");
+    background-size: auto;
+    border: 4px inset black;
+}
+
+.cookie-clicker-btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    width: inherit;
+}
+
+.top-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+
+.top-container-stats {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5px;
+
+    div {
+        font-size: 1rem;
+        color: white;
+        font-family: cursive;
+        margin-right: 5px;
+        span {
+            font-size: 1.5rem;
+            color: white;
+            font-family: cursive;
+        }
+    }
+}
+
+.top-container-upgrade {
+    display: flex;
+    justify-content: end;
+    align-items: cneter;
+    margin-right: 5px;
+    button {
+        background-color: #49d649;
+        background: url("https://orteil.dashnet.org/cookieclicker/img/storeTile.jpg")
+            no-repeat;
+        height: 3rem;
+        width: 7rem;
+        color: white;
+        font-size: 1rem;
+        font-family: cursive;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        filter: drop-shadow(-0.1px 4px 2px #222);
+        &:focus {
+            outline: none;
+        }
+        &:hover {
+            background-color: #43c443;
+            filter: drop-shadow(-0.1px 5px 3px #222);
+        }
+        &:active {
+            background-color: #49d649;
+            filter: drop-shadow(-0.1px 6px 4px #222);
+        }
+    }
+}
+
+.bottom-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.money-display {
+    font-size: 2rem;
+    color: white;
+    font-family: cursive;
+}
+
+.cookie-clicker-btn {
+    background: url("/CSPBlog1/images/cookie.png") no-repeat;
+    background-size: contain;
+    width: 20rem;
+    height: 20rem;
+    border: none;
+    cursor: pointer;
+    -webkit-filter: drop-shadow(5px 5px 5px #222);
+    filter: drop-shadow(5px 5px 5px #222);
+    transition: all 0.1s ease-in-out;
+    padding: 1rem;
+    &:focus {
+        outline: none;
+    }
+    &:hover {
+        -webkit-filter: drop-shadow(10px 10px 10px #222);
+        filter: drop-shadow(10px 10px 10px #222);
+        width: 20.1rem;
+        height: 20.1rem;
+    }
+    &:active {
+        -webkit-filter: drop-shadow(1px 1px 1px #222);
+        filter: drop-shadow(1px 1px 1px #222);
+        width: 19.9rem;
+        height: 19.9rem;
+    }
+}
+
+.clicked-cookie {
+    -webkit-filter: drop-shadow(1px 1px 1px #222);
+    filter: drop-shadow(1px 1px 1px #222);
+    width: 19.9rem;
+    height: 19.9rem;
+}
+
+.mini-cookie-popup {
+    position: absolute;
+    pointer-events: none;
+    background: url("/CSPBlog1/images/cookie.png") no-repeat;
+    background-size: contain;
+    width: 1rem;
+    height: 1rem;
+    border: none;
+    transition: all 1s ease-in-out;
+    padding: 1rem;
+}
