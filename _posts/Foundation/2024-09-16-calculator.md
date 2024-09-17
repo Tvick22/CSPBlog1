@@ -1,11 +1,9 @@
 ---
-toc: true
-comments: false
 layout: post
 title: Calculator
 description: Calculator for Basic Math
-type: tangibles
-courses: { blogs: { week: 4 } }
+type: issues
+comments: False
 ---
 
 <!-- Add a container for the animation -->
