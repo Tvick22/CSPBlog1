@@ -11,6 +11,9 @@ const upgradeAutoClickerCostDisplay = document.getElementById(
 const clicksPerSecondDisplay = document.getElementById("clicks-per-second");
 const perClickDisplay = document.getElementById("per-click");
 const gameContainer = document.getElementById("game-container");
+const autoClicksPerSecondUpgradeCostDisplay = document.getElementById(
+  "upgrade-auto-clicks-per-second",
+);
 
 const money = initMoney();
 
@@ -20,6 +23,8 @@ function initMoney() {
   upgradePrice = 10;
   autoClickers = 0;
   autoClickerPrice = 500;
+  autoClicksPerSecond = 1;
+  autoClicksPerSecondUpgradeCost = 750;
 
   moneyDisplay.innerHTML = total;
   clicksPerSecondDisplay.innerHTML = autoClickers;
@@ -35,7 +40,10 @@ function initMoney() {
       total += amount;
       moneyDisplay.innerHTML = total;
       if (amount > 0) {
-        gameContainer.appendChild(makeMiniCookiePopup());
+        for (let i = 0; i < amount; i++) {
+          gameContainer.appendChild(makeMiniCookiePopup());
+        }
+        debugger;
       }
     },
     upgrade() {
@@ -83,8 +91,7 @@ function initMoney() {
       upgradeAutoClickerCostDisplay.innerHTML = autoClickerPrice;
     },
     autoClick() {
-      console.log(autoClickers);
-      money.addMoney(autoClickers);
+      money.addMoney(autoClickers * autoClicksPerSecond);
       if (autoClickers > 0) {
         cookieBtn.classList.add("clicked-cookie");
         setTimeout(() => {
@@ -92,36 +99,52 @@ function initMoney() {
         }, 250);
       }
     },
+    upgradeAutoClicksPerSecond() {
+      if (total < autoClicksPerSecondUpgradeCost) {
+        console.log("Insufficient Funds");
+        return false;
+      }
+
+      money.removeMoney(autoClicksPerSecondUpgradeCost);
+      money.increaseAutoClickerPerClick(1);
+      autoClicksPerSecondUpgradeCost *= 2;
+      autoClicksPerSecondUpgradeCostDisplay.innerHTML =
+        autoClicksPerSecondUpgradeCost;
+    },
+    increaseAutoClickerPerClick(amount) {
+      autoClicksPerSecond += amount;
+      this.updateStats();
+    },
   };
 }
 
 function makeMiniCookiePopup() {
   const miniCookiePopup = document.createElement("div");
-  let initialized = false;
-  // make the popup appear on the mouse cursor
-  const mouseListener = addEventListener("click", (event) => {
-    if (!initialized) {
-      const x = event.clientX;
-      const y = event.clientY + window.scrollY;
-      console.log(window.scrollY);
-      miniCookiePopup.style.left = x + "px";
-      miniCookiePopup.style.top = y + "px";
-      // debugger;
-    }
-    initialized = true;
-  });
-
   miniCookiePopup.classList.add("mini-cookie-popup");
+  const cookieRect = cookieBtn.getBoundingClientRect();
+
+  const centerY = cookieRect.y + window.scrollY + cookieRect.height / 2;
+  const centerX = cookieRect.x + window.scrollX + cookieRect.width / 2;
+  miniCookiePopup.style.left =
+    centerX -
+    cookieRect.width / 2 +
+    Math.floor(Math.random() * cookieRect.width) +
+    "px";
+  miniCookiePopup.style.top =
+    centerY -
+    cookieRect.height / 2 +
+    Math.floor(Math.random() * cookieRect.height) +
+    "px";
 
   setTimeout(() => {
-    miniCookiePopup.style.left = "52%";
-    miniCookiePopup.style.top = "55%";
+    miniCookiePopup.style.left = centerX + "px";
+    miniCookiePopup.style.top = centerY + "px";
   }, 100);
 
   setTimeout(() => {
-    removeEventListener("click", mouseListener);
     miniCookiePopup.remove();
   }, 1000);
+
   return miniCookiePopup;
 }
 
