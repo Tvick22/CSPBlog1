@@ -20,17 +20,26 @@ const upgradeAutoClicksMultiplierBtn = document.getElementById(
 const autoClicksMultiplierDisplay = document.getElementById(
   "auto-clicks-multiplier",
 );
+const upgradeCookieLevelBtn = document.getElementById(
+  "upgrade-cookie-level-btn",
+);
+const cookieLevelCostDisplay = document.getElementById(
+  "upgrade-cookie-level-cost",
+);
+const cookieLevelDisplay = document.getElementById("cookie-level");
 
 const money = initMoney();
 
 function initMoney() {
-  total = 2250;
+  total = 0;
   perClick = 1;
   upgradePrice = 10;
   autoClickers = 0;
   autoClickerPrice = 500;
   autoClicksMultiplier = 1;
   autoClicksMultiplierUpgradeCost = 750;
+  cookieLevelUpgradeCost = 5000;
+  cookieLevel = 1;
 
   moneyDisplay.innerHTML = total;
   clicksPerSecondDisplay.innerHTML = autoClickers;
@@ -40,13 +49,14 @@ function initMoney() {
   autoClicksMultiplierUpgradeCostDisplay.innerHTML =
     autoClicksMultiplierUpgradeCost;
   autoClicksMultiplierDisplay.innerHTML = autoClicksMultiplier;
+  cookieLevelCostDisplay.innerHTML = cookieLevelUpgradeCost;
 
   return {
     addClickMoney() {
       this.addMoney(perClick);
     },
     addMoney(amount) {
-      total += amount;
+      total += amount * cookieLevel;
       moneyDisplay.innerHTML = total;
       if (amount > 0) {
         for (let i = 0; i < amount; i++) {
@@ -80,9 +90,11 @@ function initMoney() {
       this.updateStats();
     },
     updateStats() {
-      clicksPerSecondDisplay.innerHTML = autoClickers * autoClicksMultiplier;
-      perClickDisplay.innerHTML = perClick;
+      clicksPerSecondDisplay.innerHTML =
+        autoClickers * autoClicksMultiplier * cookieLevel;
+      perClickDisplay.innerHTML = perClick * cookieLevel;
       autoClicksMultiplierDisplay.innerHTML = autoClicksMultiplier;
+      cookieLevelDisplay.innerHTML = cookieLevel;
     },
     increaseAutoClickers(amount) {
       autoClickers += amount;
@@ -122,6 +134,21 @@ function initMoney() {
     },
     increaseAutoClickerPerClick(amount) {
       autoClicksMultiplier += amount;
+      this.updateStats();
+    },
+    upgradeCookieLevel() {
+      if (total < cookieLevelUpgradeCost) {
+        console.log("Insufficient Funds");
+        return false;
+      }
+
+      money.removeMoney(cookieLevelUpgradeCost);
+      money.increaseCookieLevel(1);
+      cookieLevelUpgradeCost *= 2;
+      cookieLevelCostDisplay.innerHTML = cookieLevelUpgradeCost;
+    },
+    increaseCookieLevel(amount) {
+      cookieLevel += amount;
       this.updateStats();
     },
   };
@@ -171,6 +198,10 @@ upgradeAutoClickerBtn.addEventListener("click", function () {
 
 upgradeAutoClicksMultiplierBtn.addEventListener("click", function () {
   money.upgradeAutoClicksMultiplier();
+});
+
+upgradeCookieLevelBtn.addEventListener("click", function () {
+  money.upgradeCookieLevel();
 });
 
 setInterval(money.autoClick, 1000);
