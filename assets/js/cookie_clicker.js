@@ -11,26 +11,35 @@ const upgradeAutoClickerCostDisplay = document.getElementById(
 const clicksPerSecondDisplay = document.getElementById("clicks-per-second");
 const perClickDisplay = document.getElementById("per-click");
 const gameContainer = document.getElementById("game-container");
-const autoClicksPerSecondUpgradeCostDisplay = document.getElementById(
-  "upgrade-auto-clicks-per-second",
+const autoClicksMultiplierUpgradeCostDisplay = document.getElementById(
+  "upgrade-auto-clicks-multiplier-cost",
+);
+const upgradeAutoClicksMultiplierBtn = document.getElementById(
+  "upgrade-auto-clicks-multiplier-btn",
+);
+const autoClicksMultiplierDisplay = document.getElementById(
+  "auto-clicks-multiplier",
 );
 
 const money = initMoney();
 
 function initMoney() {
-  total = 500;
+  total = 2250;
   perClick = 1;
   upgradePrice = 10;
   autoClickers = 0;
   autoClickerPrice = 500;
-  autoClicksPerSecond = 1;
-  autoClicksPerSecondUpgradeCost = 750;
+  autoClicksMultiplier = 1;
+  autoClicksMultiplierUpgradeCost = 750;
 
   moneyDisplay.innerHTML = total;
   clicksPerSecondDisplay.innerHTML = autoClickers;
   perClickDisplay.innerHTML = perClick;
   upgradeAutoClickerCostDisplay.innerHTML = autoClickerPrice;
   upgradeCostDisplay.innerHTML = upgradePrice;
+  autoClicksMultiplierUpgradeCostDisplay.innerHTML =
+    autoClicksMultiplierUpgradeCost;
+  autoClicksMultiplierDisplay.innerHTML = autoClicksMultiplier;
 
   return {
     addClickMoney() {
@@ -43,7 +52,6 @@ function initMoney() {
         for (let i = 0; i < amount; i++) {
           gameContainer.appendChild(makeMiniCookiePopup());
         }
-        debugger;
       }
     },
     upgrade() {
@@ -72,8 +80,9 @@ function initMoney() {
       this.updateStats();
     },
     updateStats() {
-      clicksPerSecondDisplay.innerHTML = autoClickers;
+      clicksPerSecondDisplay.innerHTML = autoClickers * autoClicksMultiplier;
       perClickDisplay.innerHTML = perClick;
+      autoClicksMultiplierDisplay.innerHTML = autoClicksMultiplier;
     },
     increaseAutoClickers(amount) {
       autoClickers += amount;
@@ -91,7 +100,7 @@ function initMoney() {
       upgradeAutoClickerCostDisplay.innerHTML = autoClickerPrice;
     },
     autoClick() {
-      money.addMoney(autoClickers * autoClicksPerSecond);
+      money.addMoney(autoClickers * autoClicksMultiplier);
       if (autoClickers > 0) {
         cookieBtn.classList.add("clicked-cookie");
         setTimeout(() => {
@@ -99,20 +108,20 @@ function initMoney() {
         }, 250);
       }
     },
-    upgradeAutoClicksPerSecond() {
-      if (total < autoClicksPerSecondUpgradeCost) {
+    upgradeAutoClicksMultiplier() {
+      if (total < autoClicksMultiplierUpgradeCost) {
         console.log("Insufficient Funds");
         return false;
       }
 
-      money.removeMoney(autoClicksPerSecondUpgradeCost);
+      money.removeMoney(autoClicksMultiplierUpgradeCost);
       money.increaseAutoClickerPerClick(1);
-      autoClicksPerSecondUpgradeCost *= 2;
-      autoClicksPerSecondUpgradeCostDisplay.innerHTML =
-        autoClicksPerSecondUpgradeCost;
+      autoClicksMultiplierUpgradeCost *= 2;
+      autoClicksMultiplierUpgradeCostDisplay.innerHTML =
+        autoClicksMultiplierUpgradeCost;
     },
     increaseAutoClickerPerClick(amount) {
-      autoClicksPerSecond += amount;
+      autoClicksMultiplier += amount;
       this.updateStats();
     },
   };
@@ -158,6 +167,10 @@ upgradeBtn.addEventListener("click", function () {
 
 upgradeAutoClickerBtn.addEventListener("click", function () {
   money.upgradeAutoClicker();
+});
+
+upgradeAutoClicksMultiplierBtn.addEventListener("click", function () {
+  money.upgradeAutoClicksMultiplier();
 });
 
 setInterval(money.autoClick, 1000);
