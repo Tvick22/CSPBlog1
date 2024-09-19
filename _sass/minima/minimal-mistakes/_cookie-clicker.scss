@@ -26,17 +26,16 @@
 
 .top-container-stats {
     display: grid;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
     margin-left: 5px;
+    font-size: 1.5vw;
 
     div {
-        font-size: 1rem;
         color: white;
         font-family: cursive;
         margin-right: 5px;
         span {
-            font-size: 1.5rem;
             color: white;
             font-family: cursive;
         }
