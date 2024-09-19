@@ -3,7 +3,7 @@ layout: post
 title: Sprint 1 Overview
 description: Overview of Sprint 1
 type: issues
-comments: False
+comments: True
 ---
 
 # Hacks Tools & Equipment Play
