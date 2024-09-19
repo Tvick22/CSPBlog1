@@ -8,6 +8,7 @@ const numbers = document.querySelectorAll(".calculator-number");
 const operations = document.querySelectorAll(".calculator-operation");
 const clear = document.querySelectorAll(".calculator-clear");
 const equals = document.querySelectorAll(".calculator-equals");
+const binaryOutput = document.getElementById("binary-output");
 
 // Number buttons listener
 numbers.forEach((button) => {
@@ -106,11 +107,16 @@ equals.forEach((button) => {
   });
 });
 
+function dec2bin(dec) {
+  return (dec >>> 0).toString(2);
+}
+
 // Equal action
 function equal() {
   // function used when the equals button is clicked; calculates equation and displays it
   firstNumber = calculate(firstNumber, parseFloat(output.innerHTML));
   output.innerHTML = firstNumber.toString();
+  binaryOutput.innerHTML = dec2bin(firstNumber);
   operator = null;
   nextReady = true;
 }
@@ -127,6 +133,7 @@ function clearCalc() {
   // clears calculator
   firstNumber = null;
   output.innerHTML = "0";
+  binaryOutput.innerHtml = "0";
   nextReady = true;
 }
 

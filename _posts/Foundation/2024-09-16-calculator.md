@@ -35,6 +35,8 @@ comments: False
     <div class="calculator-operation btn btn-outline btn-accent">^</div>
     <div></div>
     <div class="calculator-equals btn btn-primary">=</div>
+
+    <div>Binary Output: <span id="binary-output"></span></div>
 </div>
 
 <!-- JavaScript (JS) implementation of the calculator. -->
