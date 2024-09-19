@@ -2,6 +2,7 @@
 layout: page
 title: About
 permalink: /about/
+comments: True
 ---
 
 # Who am I?
@@ -43,3 +44,12 @@ permalink: /about/
   box-shadow: 5px 5px 5px grey;
 }
 </style>
+
+<script src="https://utteranc.es/client.js"
+        repo="Tvick22/CSPBlog1"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/CSPBlog1/2024/09/04/button_layout.html" hidden></a>
