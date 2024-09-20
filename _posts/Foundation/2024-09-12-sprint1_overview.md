@@ -12,6 +12,14 @@ comments: True
 
 > I learned about different data types in **Python** and tested these in [an online python playground](https://programiz.pro/ide/python)
 
+## [Example 2]({{site.baseurl}}/2024/09/19/python_emojis.html)
+
+> I learned about using pip to install packages and how to use the inspect module to find the source code of a function, along with the newspaper package and wikipedia package.
+
+## [Example 3]({{site.baseurl}}/2024/09/17/python_math.html)
+
+> I learned about the different data types in Python and how to use the statistics module to find the mean of a list of numbers.
+
 # Hacks GitHub Pages Playground
 
 ## [Notebook About Pages]({{site.baseurl}}/2024/09/09/setting_up_pages.html)
