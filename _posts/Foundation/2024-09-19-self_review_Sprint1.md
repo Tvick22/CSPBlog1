@@ -27,13 +27,13 @@ Rank to Ratio, rank is an integer
 | Show VSCode GitLens                    | [Y]            | 4          | 0.95  |                                                         |
 | GitHub student_2025 repo               | [Y]            | 4          | 0.95  |                                                         |
 | GitHub Pages Actions                   | [Y]            | 4          | 0.95  |                                                         |
-| Hacks Tools & Equipment Play           | [N]            | 4          | 0.90   | [Hacks](https://nighthawkcoders.github.io/portfolio_2025/jupyter/notebook/python#hacks) |
+| Hacks Tools & Equipment Play           | [N]            | 4          | 0.90   | [Hacks](https://nighthawkcoders.github.io/portfolio_2025/jupyter/notebook/python#hacks)  |
 | Hacks GitHub Pages Playground          | [N]            | 4          | 0.90   | [Hacks](https://nighthawkcoders.github.io/portfolio_2025/github/pages/hacks) |
 | Hacks SASS Basics                      | [N]            | 4          | 0.90   | [Hacks](https://nighthawkcoders.github.io/portfolio_2025/sass_basics/play) |
-| Hacks Frontend                         | [N]            | 4          | 0.90  | [Hacks](https://nighthawkcoders.github.io/portfolio_2025/frontend/basics/playground) |
+| Hacks Frontend                         | [Y]            | 4          | 0.95  | [Hacks](https://nighthawkcoders.github.io/portfolio_2025/frontend/basics/playground) |
 | Pair Programming                       | [N]            | 3          | 0.85   | tangibles that show coop work                           |
-| **Total**                              |                |            | 9.05   |                                                         |
-| **Average**                            |                |            | 0.905   |                                                         |
+| **Total**                              |                |            | 9.25   |                                                         |
+| **Average**                            |                |            | 0.925   |                                                         |
 
 ## Learning Habits Table
 Review criteria in habits.  In this review, pairs should rate each other base on their experience with the person on the line item.
@@ -52,11 +52,11 @@ Rank to Ratio, rank is an integer
 | Behavior       | [Y]            | 4            | 0.95  |       |
 | Timeliness     | [Y]            | 4            | 0.95  |       |
 | Tech Sense     | [N]            | 4            | 0.90  |       |
-| Tech Talk      | [N]            | 4            | 0.90  |       |
-| Tech Growth    | [Y]            | 4            | 0.95  | After working as a pair and watching his skils improve, I think he has a very substancial growth in his tech skills.  |
+| Tech Talk      | [Y]            | 4            | 0.95  |       |
+| Tech Growth    | [Y]            | 4            | 0.95  |       |
 | Advocacy       | [Y]            | 4            | 0.95  |       |
 | Comm & Collab  | [Y]            | 4            | 0.95  |       |
 | Integrity      | [Y]            | 4            | 0.95  |       |
 | Organized      | [Y]            | 4            | 0.95  |       |
-| **Total**      |                |              | 10.05 |       |
-| **Average**    |                |              | 0.90  |       |
+| **Total**      |                |              | 10.40 |       |
+| **Average**    |                |              | 0.94  |       |
