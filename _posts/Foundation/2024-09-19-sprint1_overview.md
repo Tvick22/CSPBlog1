@@ -12,11 +12,11 @@ comments: True
 
 > I learned about different data types in **Python** and tested these in [an online python playground](https://programiz.pro/ide/python)
 
-## [Example 2]({{site.baseurl}}/2024/09/19/python_emojis.html)
+## [Example 2]({{site.baseurl}}/2024/09/19/python_emojis_IPYNB_2_.html)
 
 > I learned about using pip to install packages and how to use the inspect module to find the source code of a function, along with the newspaper package and wikipedia package.
 
-## [Example 3]({{site.baseurl}}/2024/09/17/python_math.html)
+## [Example 3]({{site.baseurl}}/2024/09/17/python_math_IPYNB_2_.html)
 
 > I learned about the different data types in Python and how to use the statistics module to find the mean of a list of numbers.
 
@@ -39,7 +39,7 @@ comments: True
 
 ## Changing my theme
 
-> In the **config.yml** file, I changed my theme to the differnt options, however, I thought the minima theme looked the best. However, in the **/_sass**
+> In the **config.yml** file, I changed my theme to the differnt options, however, I thought the **minima minimal mistakes** theme looked the best. However, in the **/_sass**
 
 ## Using SCSS
 
@@ -69,8 +69,24 @@ comments: True
 ```
 
 > I used SCSS to style my buttons and different elements of the page. I created a new file called **/_chips-manager.scss** within the directory **/_sass**.
+> I also used SCSS to style the other pages I created, all with their own **.scss** files which I imported in the **__minimal-mistakes.scss** file.
+
+```scss
+@import "_chips-manager";
+@import "_calculator";
+@import "_cookie-clicker";
+```
 
 # Hacks Frontend
+
+## [Chip Manager]({{site.baseurl}}/2024/09/10/chips_manager)
+> I created a simple manager for poker chips. I made the layout using HTML. I used SCSS to style my buttons and different elements of the page. I created a new file called **/_chips-manager.scss** to do this.
+
+## [Cookie Clicker]({{site.baseurl}}/2024/09/16/cookie_clicker)
+> I created a simple cookie clicker project. I made the layout using HTML. I used SCSS to style my buttons and different elements of the page. I created a new file called **/_cookie-clicker.scss** to do this.
+
+## [Roulette Table]({{site.baseurl}}/2024/08/28/roulette_table)
+> I created a simple roulette table to bet on colors. I made the layout using HTML. I used SCSS to style my buttons and different elements of the page.
 
 ## HTML for my Chip Manager
 
