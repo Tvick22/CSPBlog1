@@ -20,7 +20,7 @@ comments: True
 
 > I learned about the different data types in Python and how to use the statistics module to find the mean of a list of numbers.
 
-## [Example 4]({{site.baseurl}}/2024/09/19/javascript_notebook_IPYNB_2_.html)
+## [Example 4]({{site.baseurl}}/javascript/2024/09/19/javascript_notebook_IPYNB_2_.html)
 
 > I learned about the differnt data structures in Javascript such as arrays and strings. I used these data types to create some tables.
 
