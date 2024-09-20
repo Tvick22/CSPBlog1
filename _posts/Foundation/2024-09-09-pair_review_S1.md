@@ -24,16 +24,16 @@ Rank to Ratio, rank is an integer
 |----------------------------------------|----------------|------------|-------|---------------------------------------------------------|
 | Laptop Verification or Cloud Workspace | [Y]            | 4          | 0.95  | verification by Linux commands notebook                 |
 | VSCode                                 | [Y]            | 4          | 0.95  | live change code, commit, make, run localhost, test, debug |
-| Show VSCode GitLens                    | [N]            | 4          | 0.9   | verify commits, show change, comments, reset to commit, run on old commit |
-| GitHub student_2025 repo               | [Y]            | 4          | 0.95  | template create, push changes, verify id, review analytics             |
-| GitHub Pages Actions                   | [N]            | 4          | 0.9   | review runs and verify runtime, receive demo            |
-| Hacks Tools & Equipment Play           | [N]            | 4          | 0.9   | [Hacks](https://nighthawkcoders.github.io/portfolio_2025/jupyter/notebook/python#hacks) |
-| Hacks GitHub Pages Playground          | [N]            | 4          | 0.9   | [Hacks](https://nighthawkcoders.github.io/portfolio_2025/github/pages/hacks) |
-| Hacks SASS Basics                      | [N]            | 4          | 0.9   | [Hacks](https://nighthawkcoders.github.io/portfolio_2025/sass_basics/play) |
-| Hacks Frontend                         | [Y]            | 4          | 0.95  | [Hacks](https://nighthawkcoders.github.io/portfolio_2025/frontend/basics/playground) |
-| Pair Programming                       | [Y]            | 4          | 0.95  | tangibles that show coop work                           |
-| **Total**                              |                |            | 9.25   |                                                         |
-| **Average**                            |                |            | 0.925   |                                                         |
+| Show VSCode GitLens                    | [N]            | 3          | 0.85   | verify commits, show change, comments, reset to commit, run on old commit |
+| GitHub student_2025 repo               | [N]            | 3          | 0.85  | template create, push changes, verify id, review analytics             |
+| GitHub Pages Actions                   | [N]            | 2          | 0.75   | review runs and verify runtime, receive demo            |
+| Hacks Tools & Equipment Play           | [N]            | 4          | 0.90   | [Hacks](https://nighthawkcoders.github.io/portfolio_2025/jupyter/notebook/python#hacks) |
+| Hacks GitHub Pages Playground          | [N]            | 4          | 0.90   | [Hacks](https://nighthawkcoders.github.io/portfolio_2025/github/pages/hacks) |
+| Hacks SASS Basics                      | [N]            | 4          | 0.90   | [Hacks](https://nighthawkcoders.github.io/portfolio_2025/sass_basics/play) |
+| Hacks Frontend                         | [N]            | 4          | 0.90  | [Hacks](https://nighthawkcoders.github.io/portfolio_2025/frontend/basics/playground) |
+| Pair Programming                       | [N]            | 3          | 0.85   | tangibles that show coop work                           |
+| **Total**                              |                |            | 9.05   |                                                         |
+| **Average**                            |                |            | 0.905   |                                                         |
 
 ## Learning Habits Table
 Review criteria in habits.  In this review, pairs should rate each other base on their experience with the person on the line item.
@@ -53,10 +53,10 @@ Rank to Ratio, rank is an integer
 | Timeliness     | [Y]            | 4            | 0.95  |       |
 | Tech Sense     | [N]            | 4            | 0.90  |       |
 | Tech Talk      | [N]            | 4            | 0.90  |       |
-| Tech Growth    | [Y]            | 4            | 0.95  |       |
+| Tech Growth    | [Y]            | 4            | 0.95  | After working as a pair and watching his skils improve, I think he has a very substancial growth in his tech skills.  |
 | Advocacy       | [Y]            | 4            | 0.95  |       |
 | Comm & Collab  | [Y]            | 4            | 0.95  |       |
 | Integrity      | [Y]            | 4            | 0.95  |       |
 | Organized      | [Y]            | 4            | 0.95  |       |
-| **Total**      |                |              | 10.35 |       |
-| **Average**    |                |              | 0.94  |       |
+| **Total**      |                |              | 10.05 |       |
+| **Average**    |                |              | 0.90  |       |
