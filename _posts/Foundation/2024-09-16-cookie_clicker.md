@@ -11,7 +11,7 @@ comments: False
         <div class="money-display">Money: <span id="money">0</span></div>
     </div>
     <div class="top-container-stats">
-        <div>clicks per second: <span id="clicks-per-second">0</span></div>
+        <div>money per second: <span id="clicks-per-second">0</span></div>
         <div>auto clicker multiplier: <span id="auto-clicks-multiplier">1</span></div>
         <div>money per click: <span id="per-click">1</span></div>
         <div>cookie level: <span id="cookie-level">1</span></div>

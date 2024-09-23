@@ -42,7 +42,6 @@ function initMoney() {
   cookieLevel = 1;
 
   moneyDisplay.innerHTML = total;
-  clicksPerSecondDisplay.innerHTML = autoClickers;
   perClickDisplay.innerHTML = perClick;
   upgradeAutoClickerCostDisplay.innerHTML = autoClickerPrice;
   upgradeCostDisplay.innerHTML = upgradePrice;
@@ -52,6 +51,10 @@ function initMoney() {
   cookieLevelCostDisplay.innerHTML = cookieLevelUpgradeCost;
 
   return {
+    getMoney() {
+      const money = total;
+      return money;
+    },
     addClickMoney() {
       this.addMoney(perClick);
     },
@@ -90,8 +93,6 @@ function initMoney() {
       this.updateStats();
     },
     updateStats() {
-      clicksPerSecondDisplay.innerHTML =
-        autoClickers * autoClicksMultiplier * cookieLevel;
       perClickDisplay.innerHTML = perClick * cookieLevel;
       autoClicksMultiplierDisplay.innerHTML = autoClicksMultiplier;
       cookieLevelDisplay.innerHTML = cookieLevel;
@@ -204,4 +205,14 @@ upgradeCookieLevelBtn.addEventListener("click", function () {
   money.upgradeCookieLevel();
 });
 
-setInterval(money.autoClick, 1000);
+let startingCookies = 0;
+
+function getCookiesPerSecond() {
+  return money.getMoney() - startingCookies;
+}
+
+setInterval(() => {
+  money.autoClick();
+  clicksPerSecondDisplay.innerHTML = getCookiesPerSecond();
+  startingCookies = money.getMoney();
+}, 1000);
