@@ -8,6 +8,50 @@ comments: True
 
 # 3.10.3 Python Hacks
 
+If you have a Python list of numbers, but want to keep certain numbers (EX: even ones), you can actually use what is called a "list comprehension."
+What this essentially does is it creates another list, but you can apply a filter or operation to it to help you get specific outputs.
+
+```python
+numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+even_numbers = [num for num in numbers if num % 2 == 0]
+
+print(even_numbers)  # Output: [2, 4, 6, 8]
+```
+
+All it takes to perform some complex calculations is one method. reduce() sums all the numbers in a given array.
+More specifically, reduce() takes a callback function (basically a function that can be referenced in later bits of code), which processes all the items in a given array.
+Create a list that uses this function.
+Now create another array containing the integers: 3, 4, 8, 9, 1, 80, and 77. Put these integers in RANDOM ORDER.
+This will be the second popcorn hack.
+Now use the sort() method to reorganize these integers in numerical order.
+Now do the same thing again, but this time write out the integers using words.
+Sort these alphabetically.
+
+```javascript
+%%javascript
+
+const numbers = [1, 2, 3, 4, 5];
+const sum = numbers.reduce((accumulator, current) => accumulator + current, 0);
+
+console.log(`Sum of the numbers: ${sum}`);
+
+//Array of randomly ordered numbers
+const randomOrderedNumbers = [3, 8, 80, 77, 1, 4]
+
+// Sorting the numbers in ascending numerical order (Uses .slice to stop from mutating the original array)
+const sortedNumbers = randomOrderedNumbers.slice().sort((a, b) => a - b);
+
+console.log(`Sorted array: ${sortedNumbers}`);
+
+// Array of number words corresponding to the numbers
+const numberWords = ['three', 'four', 'eight', 'nine', 'one', 'eighty', 'seventy-seven'];
+
+// Sorting the words alphabetically
+const sortedNumberWords = numberWords.slice().sort();
+
+console.log(`Alphabetically sorted: ${sortedNumberWords}`);
+```
+
 - Create a program that lets users manage a list of their choosing.
 - Users can add elements, remove them, check if an element exists, and display the current list.
 - A function that can find the maximum and minimum value of a list using iteration.
