@@ -20,6 +20,7 @@ hide: true
 | [Calculator]({{site.baseurl}}/2024/09/16/calculator) | Calculator that outputs both binary and base-10 numbers |
 | [Chip Manager]({{site.baseurl}}/2024/09/10/chips_manager) | Simple manager for poker chips |
 | [Roulette Table]({{site.baseurl}}/2024/08/28/roulette_table) | Simple roulette table to bet on colors |
+| [Sprint 2 Learning Blog]({{site.baseurl}}/2024/10/15/sprint_2_learning_blog) | Personal blog about things I learned from the lessons in Sprint 2 |
 
 <img id="Mario" src="https://www.icegif.com/wp-content/uploads/2023/03/icegif-1490.gif"
 alt="mario" style="width:130px; position:absolute; bottom:0; left:0; transition: all 0s;">
