@@ -10,6 +10,11 @@ type: issues
         PRESS [SPACE] TO START THE GAME
     </div>
 </div>
+<div class="absolute w-full flex items-center justify-center">
+    <div hidden id="game-over" class="text-red font-bold text-4xl">
+        GAME OVER
+    </div>
+</div>
 <div class="flex items-center	justify-center">
 <div class="h-screen aspect-square bg-white border border-gray-200 rounded-3xl shadow">
     <header class="gradient-font text-center font-extrabold text-lg border-b-2 border-gray200">
@@ -28,15 +33,19 @@ type: issues
 <script>
 const container = document.getElementById("snake-container")
 const startGamePrompt = document.getElementById("start-game-prompt")
+const gameOver = document.getElementById("game-over")
 
 const rows = 15
 const cols = 20
 let score = 0
 let dead = false
 
-const bgColor1 = "bg-green-500"
-const bgColor2 = "bg-green-400"
-const gameSpeed = 100;
+const normalBgColor1 = "bg-green-500"
+const normalBgColor2 = "bg-green-400"
+
+let bgColor1 = normalBgColor1
+let bgColor2 = normalBgColor2
+let gameSpeed = 100;
 
 let apples = [];
 const appleColor = "bg-red-500";
@@ -212,12 +221,14 @@ const snake = {
     gameOn = false
     dead = true
     console.log("Game over")
+    gameOver.hidden = false
     this.draw(oldHeadX, oldHeadY, "bg-red")
     setTimeout(() => {
+      gameOver.hidden = true
+      resetScore()
       clearBackground(bgColor1, bgColor2)
       apples = []
       initApple(8,1)
-      resetScore()
       startGamePrompt.hidden = false
       this.headX = 1
       this.headY = 1
@@ -264,7 +275,10 @@ function handleKeyPress (event) {
     snake.changeDirection("left")
   }
   if (event.keyCode == 69) {
-    snake.length++
+    gameSpeed = 50
+    setTimeout(() => {
+      gameSpeed = 100
+    }, 1000)
   }
 }
 
@@ -330,11 +344,25 @@ function setBackground (color1, color2) {
 function addScore(points) {
   score += points
   document.getElementById("score").innerHTML = score
+  if (score >= 100) {
+    bgColor1 = "bg-indigo-400"
+    bgColor2 = "bg-indigo-500"
+  }
+  if (score >= 200) {
+    bgColor1 = "bg-emerald-400"
+    bgColor2 = "bg-emerald-500"
+  }
+  if (score >= 300) {
+    bgColor1 = "bg-yellow-400"
+    bgColor2 = "bg-yellow-500"
+  }
 }
 
 function resetScore() {
   score = 0
   document.getElementById("score").innerHTML = score
+  bgColor1 = normalBgColor1
+  bgColor2 = normalBgColor2
 }
 
 function gameLoop() {
