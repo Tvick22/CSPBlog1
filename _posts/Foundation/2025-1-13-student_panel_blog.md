@@ -25,3 +25,5 @@ When applying to colleges, your personal projects carry significant weight. Admi
 
 #### 6. Network Through Practical Contributions
 Networking isn’t just about LinkedIn connections—it’s about demonstrating value. A practical way to network is by offering to create websites, apps, or tools for local businesses or organizations. These real-world experiences not only build your portfolio but also expand your professional circle.
+
+![panel img]({{site.baseurl}}/images/student_panel.jpg)
