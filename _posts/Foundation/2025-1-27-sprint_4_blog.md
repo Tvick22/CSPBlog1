@@ -499,3 +499,111 @@ class CarPost(db.Model):
                 post.create()
         return users
 ```
+
+## CPT QUESTIONS
+
+### The first program code segment must be a student-developed procedure that:
+
+- [x] Defines the procedure’s name and return type (if necessary)
+- [x] Contains and uses one or more parameters that have an effect on the functionality of the procedure
+- [x] Implements an algorithm that includes sequencing, selection, and iteration
+
+```js
+export async function getPostsByType(carType) {
+  const possibleCarTypes = ["gas", "electric", "hybrid", "dream", "all"];
+  if (!possibleCarTypes.includes(carType)) {
+    throw new Error("Invalid car type");
+  }
+
+  let endpoint = pythonURI + "/api/carPost/allPosts/" + carType;
+
+  if (carType == "all") {
+    endpoint = pythonURI + "/api/carPost";
+  }
+
+  try {
+    const response = await fetch(endpoint, fetchOptions);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch posts: ${response.status}`);
+    }
+    const posts = await response.json();
+    return posts;
+  } catch (error) {
+    console.error("Error fetching posts:", error.message);
+    return null;
+  }
+}
+```
+
+### The second program code segment must show where your student-developed procedure is being called in your program.
+
+```js
+getPostsByType(carType).then((posts) => {
+  if (posts) {
+    const postsContainer = document.getElementById("posts-container");
+    const dateNow = new Date();
+    const dateNowString = dateNow.getMonth()+1 + "/" + dateNow.getDate() + "/" + dateNow.getFullYear();
+    const dateNowHours = dateNow.getHours();
+    const orderedPostElements = [...posts]
+    const orderedPosts = orderPostByDate(posts)
+
+    orderedPosts.forEach((post, i) => {
+      getImagesByPostId(post.id).then((images) => {
+        const formattedImages = [];
+        images.forEach((image) => {
+          formattedImages.push(`data:image/jpeg;base64,${image}`);
+        });
+        const date = new Date(post.date_posted)
+        let dateString = date.getMonth()+1 + "/" + date.getDate() + "/" + date.getFullYear();
+        if (dateNowString === dateString) {
+          dateString = "Today";
+        }
+        const postElement = makePostElement(post.title, post.description, dateString, formattedImages, post.id, post.car_type, post.user.name);
+        postsContainer.appendChild(postElement)
+      });
+    });
+  } else {
+    console.error("Failed to fetch posts");
+  }
+});
+```
+
+### The first program code segment must show how data have been stored in the list
+
+```js
+function orderPostByDate(posts) {
+  const sortedPosts = posts
+
+  sortedPosts.sort((post1, post2) => {
+    const dateTime1 = new Date(post1["date_posted"])
+    const dateTime2 = new Date(post2["date_posted"])
+
+    return dateTime1.getTime()-dateTime2.getTime()
+  })
+  return sortedPosts
+}
+```
+
+- **posts** parameter is an array
+
+### The second program code segment must show the data in the same list being used, such as creating new data from the existing data or accessing multiple elements in the list, as part of fulfilling the program’s purpose.
+
+```js
+const orderedPosts = orderPostByDate(posts)
+
+orderedPosts.forEach((post, i) => {
+  getImagesByPostId(post.id).then((images) => {
+    const formattedImages = [];
+    images.forEach((image) => {
+      formattedImages.push(`data:image/jpeg;base64,${image}`);
+    });
+    const date = new Date(post.date_posted)
+    let dateString = date.getMonth()+1 + "/" + date.getDate() + "/" + date.getFullYear();
+    if (dateNowString === dateString) {
+      dateString = "Today";
+    }
+    const postElement = makePostElement(post.title, post.description, dateString, formattedImages, post.id, post.car_type, post.user.name);
+    postsContainer.appendChild(postElement)
+  });
+});
+```
