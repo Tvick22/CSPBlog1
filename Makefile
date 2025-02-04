@@ -1,66 +1,155 @@
-# Sample workflow for building and deploying a Jekyll site to GitHub Pages
-name: Deploy Jekyll with GitHub Pages dependencies preinstalled
+# Configuration, override port with usage: make PORT=4200
+PORT ?= 4100
+REPO_NAME ?= portfolio_2025
+LOG_FILE = /tmp/jekyll$(PORT).log
 
-on:
-  # Runs on pushes targeting the default branch
-  push:
-    branches: ["main"]
+SHELL = /bin/bash -c
+.SHELLFLAGS = -e # Exceptions will stop make, works on MacOS
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+# Phony Targets, makefile housekeeping for below definitions
+.PHONY: default server issues convert clean stop
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+# List all .ipynb files in the _notebooks directory
+NOTEBOOK_FILES := $(shell find _notebooks -name '*.ipynb')
+CSP_NOTEBOOK_FILES := $(shell find _notebooks/CSP -name '*.ipynb')
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+# Specify the target directory for the converted Markdown files
+DESTINATION_DIRECTORY = _posts
+MARKDOWN_FILES := $(patsubst _notebooks/%.ipynb,$(DESTINATION_DIRECTORY)/%_IPYNB_2_.md,$(NOTEBOOK_FILES))
+CSP_MARKDOWN_FILES := $(patsubst _notebooks/CSP/%.ipynb,$(DESTINATION_DIRECTORY)/%_IPYNB_2_.md,$(CSP_NOTEBOOK_FILES))
 
-jobs:
-  # Build job
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.1' # Set this to your desired Ruby version
-          bundler-cache: true
-      - name: Install Jekyll and dependencies
-        run: |
-          gem install bundler
-          bundle install
-      - name: Install Python dependencies
-        run: |
-          python -m venv venv  # Create virtual environment
-          source venv/bin/activate  # Activate the virtual environment
-          pip install -r requirements.txt  # Install Python packages
+# Call server, then verify and start logging
+# ...
 
-      - name: Execute conversion script
-        run: |
-          source venv/bin/activate  # Activate virtual environment
-          python scripts/convert_notebooks.py  # Run your Python script
-      - name: Build with Jekyll
-        run: |
-          bundle exec jekyll build  # Build your Jekyll site
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+# Call server, then verify and start logging
+default: server
+	@echo "Terminal logging starting, watching server..."
+	@# tail and awk work together to extract Jekyll regeneration messages
+	@# When a _notebook is detected in the log, call make convert in the background
+	@# Note: We use the "if ($$0 ~ /_notebooks\/.*\.ipynb/) { system(\"make convert &\") }" to call make convert
+	@(tail -f $(LOG_FILE) | awk '/Server address: http:\/\/127.0.0.1:$(PORT)\/$(REPO_NAME)\// { serverReady=1 } \
+	serverReady && /^ *Regenerating:/ { regenerate=1 } \
+	regenerate { \
+		if (/^[[:blank:]]*$$/) { regenerate=0 } \
+		else { \
+			print; \
+			if ($$0 ~ /_notebooks\/.*\.ipynb/) { system("make convert &") } \
+		} \
+	}') 2>/dev/null &
+	@# start an infinite loop with timeout to check log status
+	@for ((COUNTER = 0; ; COUNTER++)); do \
+		if grep -q "Server address:" $(LOG_FILE); then \
+			echo "Server started in $$COUNTER seconds"; \
+			break; \
+		fi; \
+		if [ $$COUNTER -eq 60 ]; then \
+			echo "Server timed out after $$COUNTER seconds."; \
+			echo "Review errors from $(LOG_FILE)."; \
+			cat $(LOG_FILE); \
+			exit 1; \
+		fi; \
+		sleep 1; \
+	done
+	@# outputs startup log, removes last line ($$d) as ctl-c message is not applicable for background process
+	@sed '$$d' $(LOG_FILE)
 
-  # Deployment job
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+csp: cspserver
+	@echo "ONLY COMPILED CSP CONTENT"
+	@echo "Terminal logging starting, watching server..."
+	@# tail and awk work together to extract Jekyll regeneration messages
+	@# When a _notebook is detected in the log, call make convert in the background
+	@# Note: We use the "if ($$0 ~ /_notebooks\/.*\.ipynb/) { system(\"make convert &\") }" to call make convert
+	@(tail -f $(LOG_FILE) | awk '/Server address: http:\/\/127.0.0.1:$(PORT)\/$(REPO_NAME)\// { serverReady=1 } \
+	serverReady && /^ *Regenerating:/ { regenerate=1 } \
+	regenerate { \
+		if (/^[[:blank:]]*$$/) { regenerate=0 } \
+		else { \
+			print; \
+			if ($$0 ~ /_notebooks\/CSP\/.*\.ipynb/) { system("make convert &") } \
+		} \
+	}') 2>/dev/null &
+	@# start an infinite loop with timeout to check log status
+	@for ((COUNTER = 0; ; COUNTER++)); do \
+		if grep -q "Server address:" $(LOG_FILE); then \
+			echo "Server started in $$COUNTER seconds"; \
+			break; \
+		fi; \
+		if [ $$COUNTER -eq 60 ]; then \
+			echo "Server timed out after $$COUNTER seconds."; \
+			echo "Review errors from $(LOG_FILE)."; \
+			cat $(LOG_FILE); \
+			exit 1; \
+		fi; \
+		sleep 1; \
+	done
+	@# outputs startup log, removes last line ($$d) as ctl-c message is not applicable for background process
+	@sed '$$d' $(LOG_FILE)
+
+
+# Start the local web server
+server: stop convert
+	@echo "Starting server..."
+	@@nohup bundle exec jekyll serve -H 127.0.0.1 -P $(PORT) > $(LOG_FILE) 2>&1 & \
+		PID=$$!; \
+		echo "Server PID: $$PID"
+	@@until [ -f $(LOG_FILE) ]; do sleep 1; done
+
+cspserver: stop cspconvert
+	@echo "Starting server..."
+	@@nohup bundle exec jekyll serve -H 127.0.0.1 -P $(PORT) > $(LOG_FILE) 2>&1 & \
+		PID=$$!; \
+		echo "Server PID: $$PID"
+	@@until [ -f $(LOG_FILE) ]; do sleep 1; done
+
+# Convert .ipynb files to Markdown with front matter
+convert: $(MARKDOWN_FILES)
+cspconvert: $(CSP_MARKDOWN_FILES)
+
+# Convert .ipynb files to Markdown with front matter, preserving directory structure
+$(DESTINATION_DIRECTORY)/%_IPYNB_2_.md: _notebooks/%.ipynb
+	@echo "Converting source $< to destination $@"
+	@mkdir -p $(@D)
+
+ # Run the external shell script for notebook conversion
+	@./scripts/convert_notebooks.sh
+
+$(DESTINATION_DIRECTORY)/%_IPYNB_2_.md: _notebooks/CSP/%.ipynb
+	@echo "Converting source $< to destination $@"
+	@mkdir -p $(@D)
+	@python3 -c 'import sys; from scripts.convert_notebooks import convert_single_notebook; convert_single_notebook(sys.argv[1])' "$<"
+
+# Clean up project derived files, to avoid run issues stop is dependency
+clean: stop
+	@echo "Cleaning converted IPYNB files..."
+	@find _posts -type f -name '*_IPYNB_2_.md' -exec rm {} +
+	@echo "Cleaning Github Issue files..."
+	@find _posts -type f -name '*_GithubIssue_.md' -exec rm {} +
+	@echo "Removing empty directories in _posts..."
+	@while [ $$(find _posts -type d -empty | wc -l) -gt 0 ]; do \
+		find _posts -type d -empty -exec rmdir {} +; \
+	done
+	@echo "Removing _site directory..."
+	@rm -rf _site
+
+
+# Stop the server and kill processes
+stop:
+	@echo "Stopping server..."
+	@# kills process running on port $(PORT)
+	@@lsof -ti :$(PORT) | xargs kill >/dev/null 2>&1 || true
+	@echo "Stopping logging process..."
+	@# kills previously running logging processes
+	@@ps aux | awk -v log_file=$(LOG_FILE) '$$0 ~ "tail -f " log_file { print $$2 }' | xargs kill >/dev/null 2>&1 || true
+	@# removes log
+	@rm -f $(LOG_FILE)
+
+# stops the server and reloads it
+reload:
+	@make stop
+	@make
+
+# stops server, cleans it, reloads it
+refresh:
+	@make stop
+	@make clean
+	@make
