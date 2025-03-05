@@ -14,6 +14,7 @@ comments: True
 | Full Stack Project Demo, including CPT requirement highlights, and N@tM feedback | 2/2 | I've covered the CPT requirements in my feature (posts). I also thought that our team also did a great job at the N@TM event from what I heard. |
 | Project Feature blog write up, using CPT/FRQ language | 0.9/1 | I covered the main idea of my feature (posts) and provided both a simple and technicle overview of the feature. I also provided a demo of the feature. |
 | MCQ | 1/1 | I completed the MCQ and anlayzed my answers. I also listed some of the answers I got wrong and looked over them so I get them right next time. |
+| Total | 9.3/10 | I think after helping other poeple with their own code, and learning a lot about server deployment, I've been able to grow as a coder. |
 
 ## Personal Reflection
 
