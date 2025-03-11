@@ -168,6 +168,8 @@ function makePostElement(title, description, date, images, postId, carType, user
 }
 ```
 
+This fufills the PPR requirement by taking an array/list of images and displaying them in a carousel. It would be much more difficult to display each image by itself without a list. This procedure also includes an algorithm that includes sequencing, selection, and iteration (map).
+
 ## 4. No Auth Page
 
 On some pages on the site, the user is required to be logged in. However, users can still access these pages by typing in the url. To prevent users from being on pages that require authentication, I created the NoAuth page. I made this a page layout so that any site can use it.
@@ -240,3 +242,5 @@ layout: base
 The make post page allows the user to ironically send a POST request to the API to create a car post. It has a form that the user needs to fill out to submit a post. This allows users to create and share their cars with others.
 
 ![make_car_page]({{site.baseurl}}/images/entering-car-info.png)
+
+This fufills the PPR requirement by allowing the user to input data with instructions.
