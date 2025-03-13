@@ -111,7 +111,7 @@ $(DESTINATION_DIRECTORY)/%_IPYNB_2_.md: _notebooks/%.ipynb
 	@mkdir -p $(@D)
 
  # Run the external shell script for notebook conversion
-	@./scripts/convert_notebooks.sh
+	@python scripts/convert_notebooks.py
 
 $(DESTINATION_DIRECTORY)/%_IPYNB_2_.md: _notebooks/CSP/%.ipynb
 	@echo "Converting source $< to destination $@"
